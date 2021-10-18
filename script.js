@@ -9,6 +9,9 @@ const settingsForm = document.getElementById('settings-form');
 const difficultySelect = document.getElementById('difficulty');
 
 // List of words for game
+//array of words for game
+
+
 const words = [
   'sigh',
   'tense',
@@ -34,15 +37,21 @@ const words = [
 
 // Init word
 let randomWord;
-
 // Init score
 let score = 0;
-
 // Init time
 let time = 10;
 
-// Set difficulty to value in ls or medium
-let difficulty =
-  localStorage.getItem('difficulty') !== null
-    ? localStorage.getItem('difficulty')
-    : 'medium';
+
+
+function getRandomWord(){
+  return words[Math.floor(Math.random() *words.length)];
+}
+console.log(getRandomWord());
+
+// }
+// // Set difficulty to value in ls or medium
+// let difficulty =
+//   localStorage.getItem('difficulty') !== null
+//     ? localStorage.getItem('difficulty')
+//     : 'medium';
