@@ -5,3 +5,5 @@ Game to beat the clock by typing random words
 
 speed typing
 
+every thing is ok
+
