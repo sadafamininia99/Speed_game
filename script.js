@@ -43,11 +43,35 @@ let score = 0;
 let time = 10;
 
 
+//generate rAndom word
 
 function getRandomWord(){
   return words[Math.floor(Math.random() *words.length)];
 }
-console.log(getRandomWord());
+// console.log(getRandomWord());
+
+//add word to dom
+
+// Add word to DOM
+function addWordToDOM() {
+  randomWord = getRandomWord();
+  word.innerHTML = randomWord;
+}
+//call
+// addWordToDom()
+addWordToDOM();
+
+
+
+// //Event listiner
+// text.addEventListener('input' ,e => {
+//   const insertedText= e.target.value;
+//   //capure the word
+
+//   console.log(insertedText);
+
+// } 
+  
 
 // }
 // // Set difficulty to value in ls or medium
