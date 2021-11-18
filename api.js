@@ -5,7 +5,7 @@ const api = axios.create({
 const getScores = async () => {
   try {
     const res = await api.get('scores');
-    return res.data;
+    return res.data.sort((a, b) => b.point - a.point);
   } catch (e) {
     return [];
   }
@@ -14,9 +14,7 @@ const getScores = async () => {
 const getScoreByHash = async hash => {
   try {
     const list = await getScores();
-
-    const found = list.find(l => l.hash === hash);
-    return found || null;
+    return list.find(l => l.hash === hash);
   } catch (e) {
     return null;
   }
@@ -46,7 +44,7 @@ const editScore = async (hash, newPoint) => {
       return res.data;
     }
 
-    return false;
+    return true;
   } catch (e) {
     return false;
   }

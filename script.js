@@ -7,6 +7,7 @@ const settingsBtn = document.getElementById('settings-btn');
 const settings = document.getElementById('settings');
 const settingsForm = document.getElementById('settings-form');
 const difficultySelect = document.getElementById('difficulty');
+const leaderboardEl = document.getElementById('leaderboard');
 
 // List of words for game
 // const words = [
@@ -97,6 +98,12 @@ function gameOver() {
   `;
 
   endgameEl.style.display = 'flex';
+
+  if (score > 0) {
+    setTimeout(() => {
+      setScore(score);
+    }, 1000);
+  }
 }
 
 addWordToDOM();
@@ -134,3 +141,43 @@ settingsForm.addEventListener('change', e => {
   difficulty = e.target.value;
   localStorage.setItem('difficulty', difficulty);
 });
+
+async function setScore(point) {
+  let res = null;
+
+  const hash = localStorage.getItem('hash');
+  if (hash) {
+    res = await editScore(hash, point);
+  } else {
+    const name = prompt('Please enter your name:');
+    if (!name) return;
+
+    res = await addScore(name, point);
+    localStorage.setItem('hash', res.hash);
+  }
+
+  if (!res) return alert('An error has occurred');
+
+  leaderboard();
+}
+
+const icons = ['🥇', '🥈', '🥉'];
+async function leaderboard() {
+  const list = await getScores();
+
+  if (list) {
+    leaderboardEl.innerHTML = '';
+
+    list.forEach((l, index) => {
+      leaderboardEl.innerHTML += `
+        <div class="leader-row">
+          <div class="leader-name">${icons[index] || '👨🏻‍💻'} ${l.name}</div>
+          <div class="leader-point">${l.point}</div>
+        </div>
+      `;
+    });
+  } else {
+    alert('An error has occurred');
+  }
+}
+leaderboard();
