@@ -2,4 +2,4 @@
 
 Game to beat the clock by typing random words
 
-![Screenshot](speed.jpg)
+![Screenshot](speedgame.png)
